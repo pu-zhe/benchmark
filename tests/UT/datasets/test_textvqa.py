@@ -72,10 +72,14 @@ class TestTEXTEvaluatorForGlm4v(unittest.TestCase):
         self.assertIn("accuracy", out)
         preds1 = ["<think>The text \"DAKOTA DIGITAL\" is prominent, so that's the brand.</think>" +
                  "<answer><|begin_of_box|>Dakota Digital<|end_of_box|></answer>"]
-        refs1 = [[{"answer": "dakota digital"}]]
+        refs1 = [[{"answer": "nous les gosses"}, {"answer": "dakota"},
+                  {"answer": "nous les gosses"}, {"answer": "dakota digital"},
+                  {"answer": "dakota"}, {"answer": "dakota"},
+                  {"answer": "dakota digital"}, {"answer": "dakota digital"},
+                  {"answer": "dakota"}, {"answer": "dakota"}]]
         out1 = eva.score(preds1, refs1)
         self.assertIn("accuracy", out1)
-        self.assertEqual(out1["accuracy"], 100.0)
+        self.assertEqual(out1["accuracy"], 70.0)
         out2 = eva.score(["a"], [[{"answer": "a"}], [{"answer": "a"}]])
         self.assertIn("error", out2)
 
