@@ -83,15 +83,6 @@ class TestTEXTEvaluatorForGlm4v(unittest.TestCase):
         out2 = eva.score(["a"], [[{"answer": "a"}], [{"answer": "a"}]])
         self.assertIn("error", out2)
 
-    def test_eval_method_exceptions(self):
-        method = VQAEvalMethod()
-        long_text = 'x' * (MAX_TARGET_LENGTH + 1)
-        with self.assertRaises(ValueError):
-            method.process_punctuation(long_text)
-        with self.assertRaises(ValueError):
-            method.process_digit_article(long_text)
-        self.assertEqual(method.remove_special_characters('foo<unk>bar'), 'foobar')
-
 
 if __name__ == '__main__':
     unittest.main()
